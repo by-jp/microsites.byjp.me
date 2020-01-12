@@ -252,7 +252,10 @@
                     console.log(e);
                 }
 
-                xhr.open( "GET", 'brain22.stl', true );
+                var qual = window.location.search.substr(1)
+                if (qual == "")
+                    qual = "mid"
+                xhr.open( "GET", 'brain-'+qual+'.stl', true );
                 xhr.responseType = "arraybuffer";
                 //xhr.setRequestHeader("Accept","text/plain");
                 //xhr.setRequestHeader("Content-Type","text/plain");
