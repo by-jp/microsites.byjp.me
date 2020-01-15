@@ -1,18 +1,69 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Brain</title>
+        <title>JP's Brain</title>
         <meta charset="utf-8">
+        <meta property="og:title" content="JP's brain">
+        <meta property="og:description" content="A 3D model of an MRI scan of JP's brain">
+        <meta property="og:image" content="https://brain.byjp.me/thumbnail.jpg">
+        <meta property="og:url" content="https://brain.byjp.me/">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <style>
             body {
                 margin: 0px;
                 background-color: #222;
+                left: 0;
+                right:0;
+                top: 0;
+                bottom: 0;
+            }
+
+            .lds-ripple {
+              display: inline-block;
+              position: relative;
+              width: 80px;
+              height: 80px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              animation: fadein 2s;
+            }
+            .lds-ripple div {
+              position: absolute;
+              border: 4px solid #fff;
+              opacity: 1;
+              border-radius: 50%;
+              animation: lds-ripple 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            }
+            .lds-ripple div:nth-child(2) {
+              animation-delay: -0.5s;
+            }
+            @keyframes lds-ripple {
+              0% {
+                top: 36px;
+                left: 36px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+              }
+              100% {
+                top: 0px;
+                left: 0px;
+                width: 72px;
+                height: 72px;
+                opacity: 0;
+              }
+            }
+            @keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
             }
         </style>
     </head>
     <body>
-        <script src="three.js"></script>
+        <div id="loading" class="lds-ripple"><div></div><div></div></div>
+        <script src="three.min.js"></script>
         <script src="detector.js"></script>
         <script>
 
@@ -207,8 +258,6 @@
                 }
             };
 
-            
-
             init();
             animate();
 
@@ -221,13 +270,6 @@
                 camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
                 camera.position.z = 175;
                 camera.position.y = 0;
-
-                controls = new THREE.TrackballControls( camera );
-                controls.target.set( 0, 0, 0 )
-                controls.rotateSpeed = 1.0;
-                controls.zoomSpeed = 1.2;
-                controls.panSpeed = 0.8;
-
                 scene.add( camera );
 
                 var directionalLight = new THREE.DirectionalLight( 0xffffff );
@@ -243,6 +285,7 @@
                         if ( xhr.status == 200 || xhr.status == 0 ) {
                             var rep = xhr.response; // || xhr.mozResponseArrayBuffer;
                             parseStlBinary(rep);
+                            document.getElementById('loading').style.visibility = "hidden"
                             mesh.rotation.x = 4.71;
                             mesh.rotation.z = 0;
                         }
@@ -264,6 +307,12 @@
 
                 renderer = new THREE.WebGLRenderer({antailias:true});
                 renderer.setSize( window.innerWidth, window.innerHeight );
+
+                controls = new THREE.TrackballControls( camera );
+                controls.target.set( 0, 0, 0 )
+                controls.rotateSpeed = 1.0;
+                controls.zoomSpeed = 1.2;
+                controls.panSpeed = 0.8;
 
                 document.body.appendChild( renderer.domElement );
             }
