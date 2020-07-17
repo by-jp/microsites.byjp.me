@@ -1,0 +1,173 @@
+<html>
+<head>
+    <title>Font of Wisdom</title>
+    <style>
+        @font-face {
+            font-family: 'Caspian';
+            src: url('Caspian-Regular.woff2') format('woff2'), url('Caspian-Regular.woff') format('woff'), url('Caspian-Regular.ttf')  format('truetype');
+        }
+        body { cursor: pointer; margin: 0; font-family: "Caspian"; font-size: 64px; width: 100%; height: 100%; align-items: center; display: flex; justify-content: center }
+        #text { width: 90% }
+        #text::after { content: '_'; animation: blink 1s step-end infinite; }
+        body.play #text::after, body.loading #text::after {display:none}
+        @keyframes blink {
+            from, to { color: transparent }
+            50% { color: black }
+        }
+
+        .icon {width: 100px; height:100px; position: absolute}
+        #loading {animation: rotating 2s linear infinite; display:none}
+        body.loading #loading {display:block}
+        #play {display: none}
+        body.play #play {display: block}
+        @keyframes rotating {
+            from {transform: rotate(0deg)}
+            to {transform: rotate(360deg)}
+        }
+    </style>
+    <script src="jsmediatags.min.js"></script>
+</head>
+<body class="loading">
+    <audio id="player"></audio>
+    <div id="text"></div>
+    <svg class="icon" id="play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45"/><path fill="#fff" d="M68.141 54.115L44.36 68.383c-3.773 2.263-6.86.517-6.86-3.883v-29c0-4.4 3.087-6.148 6.859-3.885l23.78 14.268c3.774 2.265 3.774 5.969.002 8.232z"/></svg>
+    <svg class="icon" id="loading" viewPort="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle id="progress" r="40" cx="50" cy="50" fill="transparent" stroke-dasharray="251.33" stroke-dashoffset="200" stroke="#000" stroke-linecap="round" stroke-width="10"></circle>
+    <script>
+        const lineCount = 3;
+        const player = document.getElementById('player');
+        const text = document.getElementById('text');
+        const play = document.getElementById("play");
+        const progress = document.getElementById("progress");
+        let nextChar;
+        let timed;
+        let nextUpdateIndex;
+        let latestText;
+
+        function reset() {
+            timed = null;
+            nextUpdateIndex = 0;
+            latestText = "";
+            text.innerText = latestText;
+        }
+
+        function loadLyrics(lyrics) {
+            const binary = atob(lyrics);
+            let offsets = { index: [] };
+            for (let i = 0; i < binary.length; i+=4) {
+                const ms = (binary.charCodeAt(i) << 16) + (binary.charCodeAt(i+1) << 8) + binary.charCodeAt(i+2);
+                offsets[ms] = binary[i+3];
+                offsets.index.push(ms);
+            }
+            return offsets;
+        }
+
+        function loadSong(song) {
+            reset();
+            player.src = song;
+
+            const playerReady = new Promise(function(good) {
+                player.load();
+                player.addEventListener('canplay', function() {
+                    good();
+                });
+            });
+
+            const lyricsReady = new Promise(function (good, bad) {
+                new jsmediatags.Reader(player.src)
+                    .setTagsToRead(["TXXX"])
+                    .read({
+                        onSuccess: function (meta) {
+                            if (!meta.tags.TXXX) return bad("No lyrics in audio");
+                            if (meta.tags.TXXX.id) meta.tags.TXXX = [meta.tags.TXXX];
+
+                            for (let i = 0; i < meta.tags.TXXX.length; i++) {
+                                // This is weirdly named, possibly an issue with tag reading lib
+                                const data = meta.tags.TXXX[i].data.user_description;
+                                if (data.substr(0, 3) == "LTB") {
+                                    good(loadLyrics(data.substring(3)))
+                                    return;
+                                }
+                            }
+                            bad("No lyrics in audio");
+                        },
+                        onError: bad
+                    });
+            });
+
+            Promise.all([lyricsReady, playerReady]).then(function(results) { startPlaying(results[0]) }).catch(console.error);
+        }
+
+        function startPlaying(lyrics) {
+            timed = lyrics;
+
+            player.addEventListener("play", function() {
+                document.body.classList.remove('loading');
+                scheduleCharacter(nextUpdateIndex);
+            });
+
+            player.addEventListener("pause", function() {
+                clearTimeout(nextChar);
+            });
+
+            player.addEventListener("ended", function() {
+                document.body.classList.add('play');
+            });
+
+            player.play().catch(function () {
+                document.body.classList.add('play');
+            });
+
+            document.addEventListener('click', function() {
+                if (player.ended) reset();
+                if (player.paused) {
+                    player.play();
+                    document.body.classList.remove('play');
+                } else {
+                    player.pause();
+                    document.body.classList.add('play');
+                }
+            });
+        }
+
+        function scheduleCharacter(idx) {
+            clearTimeout(nextChar);
+            const write = function () {
+                const char = timed[timed.index[idx]];
+                latestText = latestText + char;
+
+                if (char === "\n") {
+                    const parts = latestText.split(char);
+                    const len = parts.length;
+                    if (len > lineCount) {
+                        latestText = parts.slice(len-lineCount, len).join(char);
+                    }
+                }
+
+                text.innerText = latestText;
+
+                nextUpdateIndex = idx + 1;
+                scheduleCharacter(nextUpdateIndex);
+            };
+
+            const now = player.currentTime * 1000;
+            const delay = timed.index[idx] - now;
+            if (delay < 5) {
+                write();
+            } else if(delay > 500) {
+                // Schedule the typing nearer the time, so it's more likely to be accurate
+                setTimeout(function() { scheduleCharacter(nextUpdateIndex) }, delay - 50);
+            } else {
+                nextChar = setTimeout(write, delay);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.hash.length > 1) {
+                loadSong(window.location.hash.substr(1)+".mp3");
+            } else {
+                loadSong("oypt.mp3");
+            }
+        });
+    </script>
+</body>
+</html>

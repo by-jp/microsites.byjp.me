@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>The most annoying sound in the world</title>
+        <meta name="description" content="The most annoying sound in the world">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            html {
+                height: 100vh;
+                width: 100vw;
+                margin: 0;
+
+                background: url('prep.jpg') no-repeat 10% center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                cursor:pointer;
+            }
+            html.annoy {
+                background-image: url('annoy.jpg');
+                cursor:default;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var html = document.getElementsByTagName('html')[0];
+            var audio = new Audio("annoying.mp3");
+            audio.loop = true;
+            audio.addEventListener('play', function() { html.classList.add('annoy') });
+            html.addEventListener('click',function() { audio.play() });
+            setTimeout(function() { audio.play() }, 1000);
+        </script>
+    </body>
+</html>

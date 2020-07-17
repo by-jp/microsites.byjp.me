@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+     <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Story Time by JP</title>
+    <link href="http://feeds.soundcloud.com/users/soundcloud:users:394133/sounds.rss" rel="alternate" type="application/rss+xml" title="Story Time by JP: Podcast">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  </head>
+  <body>
+    <div class="container text-xs-center">
+      <hgroup>
+        <h1 class="display-3">Story Time <small class="text-muted">by JP</small></h1>
+        <p>
+          A collection of short stories, read just for you.<br />
+          Available as a <a href="/podcast.xml">podcast</a>.
+        </p>
+      </hgroup>
+    
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe scrolling="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/394133&amp;color=ff5500&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
