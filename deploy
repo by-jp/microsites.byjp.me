@@ -1,0 +1,12 @@
+#!/bin/bash
+subsite=$1
+
+[[ ! -e "$subsite" ]] && { echo "No such subsite: $subsite"; exit 1; }
+
+[[ -e "$subsite/deploy" ]] && { "./$subsite/deploy"; exit 0; }
+
+hash=$(ipfs add -r -Q "$subsite")
+curl -s https://ipfs.calico.byjp.me/ipfs/$hash > /dev/null
+
+pinata "$subsite.byjp.me" $hash || { echo "Unable to pin"; exit 1; }
+echo "Swap the TXT DNS entry for _dnslink.$subsite.byjp.me to point to 'dnslink=/ipfs/$hash'"
