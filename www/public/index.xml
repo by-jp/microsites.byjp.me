@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>by JP</title>
+    <link>/</link>
+    <description>Recent content on by JP</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Curiosities</title>
+      <link>/curiosities/</link>
+      <pubDate>Fri, 01 Nov 2019 17:47:42 +0000</pubDate>
+      
+      <guid>/curiosities/</guid>
+      <description>I&amp;rsquo;m a thoroughly miriscient chap, and this often ends up in me creating toys, trinkets, projects and other artistic things.
+ small { text-align:center; display:block } .post-content li { display:none; opacity: 0 } li.active { display:inherit; opacity: 1; animation: fade 0.5s ease-in-out; } @keyframes fade { 0% { display: none; opacity: 0; } 1% { display: inherit; opacity: 0; } 100% { display: inherit; opacity: 1; } }  .post-content li { display: inherit; opacity: 1 }</description>
+    </item>
+    
+  </channel>
+</rss>
