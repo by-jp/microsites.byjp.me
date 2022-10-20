@@ -62,22 +62,21 @@
     margin-top: 30px;
     font-size: 0.8rem;
     line-height: normal;
-    @include dimmed;
+    
+    @media (prefers-color-scheme: dark) { color: $dark-color-dim; }
+    @media (prefers-color-scheme: light) { color: $light-color-dim; }
 
     p {
-      margin: 0.8em 0;
-    }
-
-    a:hover {
-      border-bottom: 1px solid white;
+      margin: 0.4em 0;
     }
 
     svg {
-      margin-right: 0.8em;
+      margin-right: 0.4em;
     }
 
     .tag {
       margin-right: 0.5em;
+      a { text-decoration: none; }
 
       &::before {
         content: "#";

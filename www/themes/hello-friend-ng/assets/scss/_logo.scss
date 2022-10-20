@@ -10,12 +10,17 @@
     height: 44px;
   }
 
-  // &__mark {
-  //   margin-right: 5px;
-  // }
+  &__mark {
+    margin-left: 1rem;
+  }
 
   &__text {
     font-size: 1.125rem;
+
+    &::after {
+      content: '>';
+      filter: brightness(65%);
+    }
   }
 
   &__cursor {
@@ -23,7 +28,6 @@
     width: 10px;
     height: 1rem;
     background: var(--accent);
-    // margin-left: 5px;
     border-radius: 1px;
     animation: cursor 1s infinite;
   }
