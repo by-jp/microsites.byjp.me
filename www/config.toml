@@ -45,8 +45,7 @@ enableEmoji     = true
 
 [languages]
   [languages.en]
-    title = "by JP"
-    subtitle = "JP Hastings-Spital"
+    title = "byJP"
     keywords = ""
     copyright = ""
     readOtherPosts = "Read other posts"
@@ -79,9 +78,9 @@ enableEmoji     = true
   # You can create a language based menu
     [languages.en.menu]
       [[languages.en.menu.main]]
-        identifier = "work"
-        name = "Work"
-        url = "https://deliveroo.engineering/"
+        identifier = "posts"
+        name = "Posts"
+        url = "/posts"
       [[languages.en.menu.main]]
         identifier = "curiosities"
         name = "Curiosities"
