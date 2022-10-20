@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: $light-color-secondary;
 
     @media #{$media-size-tablet} {
@@ -28,18 +28,18 @@
       margin-top: 10px;
     }
 
-    & > *:not(:last-child) {
-      border-right: 1px solid;
-      padding: 0 15px;
+    & > *:not(:last-child)::after {
+      content: "•";
+      padding: 0 5px;
 
       @media #{$media-size-tablet} {
-        border: none;
-        padding: 0;
+          content: "";
+          padding: 0;
       }
     }
 
     & > *:last-child {
-      padding: 0 15px;
+      padding: 0 0px;
 
       @media #{$media-size-tablet} {
           padding: 0;
