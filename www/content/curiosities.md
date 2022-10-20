@@ -1,5 +1,6 @@
 ---
 title: "Curiosities"
+emoji: 🧠
 date: 2019-11-01T17:47:42Z
 draft: false
 ---

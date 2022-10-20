@@ -18,7 +18,7 @@
     </div>
 
     <article>
-      <h1 class="post-title">
+      <h1 class="post-title"{{ with .Params.emoji }} data-emoji="{{.}}"{{end}}>
         <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
       </h1>
 

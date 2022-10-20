@@ -1,5 +1,6 @@
 ---
 title: "Miriscient"
+emoji: 🤩
 date: 2019-04-24T15:12:03+01:00
 draft: false
 images:

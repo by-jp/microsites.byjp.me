@@ -78,10 +78,14 @@ enableEmoji     = true
   # You can create a language based menu
     [languages.en.menu]
       [[languages.en.menu.main]]
+        identifier = "curiosities"
+        name = "Curiosities"
+        url = "/curiosities"
+      [[languages.en.menu.main]]
         identifier = "posts"
         name = "Posts"
         url = "/posts"
       [[languages.en.menu.main]]
-        identifier = "curiosities"
-        name = "Curiosities"
-        url = "/curiosities"
+        identifier = "mail"
+        name = ":postbox:"
+        url = "/standing-invitation"

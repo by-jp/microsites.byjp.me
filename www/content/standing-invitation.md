@@ -1,14 +1,15 @@
 ---
-title: "📮 Standing Invitation"
+title: "Standing Invitation"
+emoji: 📮
 date: 2022-10-20T11:25:37Z
 draft: false
 ---
 
 This is a standing invitation to write to me about anything that's on your mind!
 
-My email address is **hello@byjp.me**.
+My email address is hello@byjp.me.
 
-I'm a very curious person, and I enjoy connecting with people over the things we think about and create. I'd love to see what you've built/created/baked/made, I'm happy to share advice on anything you think my opinion is valuable for, and it's even nice just to hear about what you're passionate about right now.
+I'm a very curious person, and I enjoy connecting with people over the things we think about and create. I'd love to see what you've created, I'm happy to share advice on anything you think my opinion is valuable for, and it's even nice just to hear about what you're passionate about right now.
 
 ## The deal
 

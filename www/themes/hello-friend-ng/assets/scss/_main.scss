@@ -58,6 +58,22 @@ body {
   }
 }
 
+*[data-emoji] {
+  position: relative;
+  filter: grayscale(1);
+  transition: filter 0.2s ease-in-out;
+
+  &::before {
+    content: attr(data-emoji);
+    position:absolute;
+    left: -4rem;
+  }
+
+  &:hover {
+    filter: none;
+  }
+}
+
 h2,
 h3,
 h4,
@@ -105,6 +121,16 @@ h4 {
 
 a {
   color: inherit;
+}
+
+main p a, main li a, nav a {
+  &:hover {
+    color: var(--accent);
+  }  
+
+  transition-property: color, filter;
+  transition-duration: .2s;
+  transition-timing-function: ease-in;
 }
 
 img {
@@ -171,6 +197,7 @@ figure {
   }
 
   &.big {
+    box-sizing:content-box;
     @media (min-width: 560px) {
       max-width: none;
       width: 100vw;
@@ -180,12 +207,16 @@ figure {
       max-width: 100vw;
       width: 150%;
       margin-left: -25%;
+
+      figcaption {
+        margin:0;
+      }
     }
   }
 
   figcaption {
-    font-size: 14px;
-    margin-top: 5px;
+    font-size: 0.8rem;
+    margin: 0 0.4rem;
     opacity: 0.6;
 
     &.left {
