@@ -1,7 +1,6 @@
 ---
 title: "Curiosities"
 emoji: 🧠
-date: 2019-11-01T17:47:42Z
 draft: false
 ---
 
@@ -9,13 +8,13 @@ I'm a thoroughly [miriscient](https://www.miriscient.org) chap, and this often e
 
 <style>li a { margin-left: 0.2em;}</style>
 
-## Writing and words
+## Words and writing
 
 * I created a word to fill a hole in the vocabulary I had to describe my _miriscient_ friends. Read or listen to 📖[the story on medium](https://medium.com/miriscient/miriscience-5e342ff198f5).
 * During the pandemic I built 🐌[slow.fyi](https://slow.fyi) so I could write to friends old and new without pressuring them to reply or be rude.
 * I published a book, 📔[A lighter side of Africa](https://www.amazon.co.uk/Lighter-Side-Africa-Paintings-Michael/dp/0993324908/), with my brother and Dad which showcases the artwork of a now sadly deceased Zimbabwean family friend, Michael J. Allard.
 
-## Art & Creativity
+## Art and Creativity
 
 * As I travel I like to take 30 second video clips of the peaceful places. I visit the 🧘‍♂️[site I made for them](http://30s.byjp.me/) when I want to relax for a moment.
 * My friend created a beautiful alphabet, I turned it into a font and 👨‍🎤[performance microsite](https://caspian.byjp.me). Read or listen to 📖[the story on medium](https://medium.com/miriscient/the-beauty-of-type-29ab1000e9e4).
