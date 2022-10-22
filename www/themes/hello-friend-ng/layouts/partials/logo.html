@@ -4,7 +4,7 @@
             <img src="{{ .Site.Params.Logo.path }}" alt="{{ .Site.Params.Logo.alt }}" />
         {{ else }}
         <span class="logo__text">{{ with .Site.Params.Logo.logoText }}{{ . }}{{ else }}byjp{{ end }}</span>
-        {{ if .IsHome }}{{ else }}<span class="logo__mark"></span>{{ .Path | replaceRE "^/" "" | replaceRE "/index.md$" ".md" | replaceRE ".md$" "" | urlize }}</span>{{ end }}
+        {{ if .IsHome }}{{ else }}<span class="logo__mark"></span>{{ .File.Path | replaceRE "^/" "" | replaceRE "/index.md$" ".md" | replaceRE ".md$" "" | urlize }}</span>{{ end }}
         <span class="logo__cursor"></span>
         {{ end }}
     </div>

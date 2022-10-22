@@ -133,7 +133,7 @@ main p a, main li a, nav a, .social a {
   transition-timing-function: ease-in;
 }
 
-img {
+img, postcard-display {
   display: block;
   max-width: 100%;
 
@@ -154,6 +154,10 @@ img {
     max-width: 25%;
     margin: auto;
   }
+}
+
+postcard-display {
+  max-width: 50%;
 }
 
 figure {
