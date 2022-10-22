@@ -73,7 +73,7 @@ enableEmoji     = true
 
     [[languages.en.params.social]]
       name = "linkedin"
-      url  = "https://www.linkedin.com/jphastings"
+      url  = "https://www.linkedin.com/in/jphastings/"
 
   # You can create a language based menu
     [languages.en.menu]
