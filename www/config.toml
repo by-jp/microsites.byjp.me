@@ -13,6 +13,7 @@ canonifyURLs = true
 enableRobotsTXT = true
 enableGitInfo   = false
 enableEmoji     = true
+disableRSS      = false
 
 [markup]
   [markup.goldmark]

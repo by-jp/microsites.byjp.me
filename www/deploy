@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf ./public/
 hugo
 cp public/404.html public/ipfs-404.html
 hash=$(ipfs add -r -Q public)
