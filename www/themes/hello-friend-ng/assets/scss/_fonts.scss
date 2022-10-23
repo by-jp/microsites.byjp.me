@@ -48,3 +48,19 @@
   src: url("../fonts/Inter-BoldItalic.woff2") format("woff2"),
        url("../fonts/Inter-BoldItalic.woff") format("woff");
 }
+
+@font-face {
+  font-family: 'Caspian';
+  font-style: normal;
+  font-display: auto;
+  font-weight: 400;
+  src: url('../fonts/Caspian-Regular.woff2') format('woff2'),
+       url('../fonts/Caspian-Regular.woff') format('woff');
+}
+
+.caspian {
+  font-family: 'Caspian';
+  text-transform: uppercase;
+  font-weight: normal;
+  line-height: 100%;
+}
