@@ -14,37 +14,33 @@ jobs:
       run: |
         MICROSITES=$(find * -type d  | awk 1 ORS='","' )
         MICROSITES=${MICROSITES::-3}
-        echo "MICROSITES=[\"$(echo $MICROSITES)\"]" >> $GITHUB_ENV        
+        echo "MICROSITES=[\"$(echo $MICROSITES)\"]" >> $GITHUB_OUTPUT 
 
   Deploy:
     needs: Enumerate
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     site: {{fromJson(needs.Enumerate.outputs.microsites)}}
+    strategy:
+      matrix:
+        site: ${{fromJson(needs.Enumerate.outputs.microsites)}}
     steps:
-      - env:
-          MICROSITES: ${{needs.Enumerate.outputs.microsites}}
-        run: |
-          echo $MICROSITES
-    # - name: Check out repository code
-    #   uses: actions/checkout@v3
-    # - name: Publish to IPFS
-    #   id: Publish
-    #   uses: aquiladev/ipfs-action@master
-    #   with:
-    #     path: ${{ matrix.site }}
-    #     service: filebase
-    #     pinName: ${{ matrix.site }}.byjp.me
-    #     filebaseBucket: microsites
-    #     filebaseKey: ${{ secrets.FILEBASE_KEY }}
-    #     filebaseSecret: ${{ secrets.FILEBASE_SECRET }}
-    # - name: Update DNSLink
-    #   env:
-    #     CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-    #     RECORD_DOMAIN: ${{ matrix.site }}.byjp.me
-    #     CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-    #   id: dnslink
-    #   uses: GoodDollar/cloudflare-update-web3-hostname@v1.2
-    #   with:
-    #     cid: ${{ steps.Publish.outputs.cid }}
+    - name: Check out repository code
+      uses: actions/checkout@v3
+    - name: Publish to IPFS
+      id: Publish
+      uses: aquiladev/ipfs-action@master
+      with:
+        path: ${{ matrix.site }}
+        service: filebase
+        pinName: ${{ matrix.site }}.byjp.me
+        filebaseBucket: microsites
+        filebaseKey: ${{ secrets.FILEBASE_KEY }}
+        filebaseSecret: ${{ secrets.FILEBASE_SECRET }}
+    - name: Update DNSLink
+      env:
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+        RECORD_DOMAIN: ${{ matrix.site }}.byjp.me
+        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+      id: dnslink
+      uses: GoodDollar/cloudflare-update-web3-hostname@v1.2
+      with:
+        cid: ${{ steps.Publish.outputs.cid }}
