@@ -21,10 +21,12 @@ jobs:
     runs-on: ubuntu-latest
     # strategy:
     #   matrix:
-    #     site: ${{fromJson(needs.Enumerate.outputs.microsites)}}
+    #     site: {{fromJson(needs.Enumerate.outputs.microsites)}}
     steps:
-      - run: |
-          echo ${{ needs.Enumerate.outputs.microsites }}
+      - env:
+          MICROSITES: ${{needs.Enumerate.outputs.microsites}}
+        run: |
+          echo $MICROSITES
     # - name: Check out repository code
     #   uses: actions/checkout@v3
     # - name: Publish to IPFS
