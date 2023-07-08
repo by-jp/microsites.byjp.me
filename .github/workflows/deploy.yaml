@@ -12,7 +12,7 @@ jobs:
     - name: Export microsite names
       id: microsites
       run: |
-        echo "MICROSITES=$(find * -type d)" >> $GITHUB_ENV        
+        echo "MICROSITES=($(find * -type d | tr "\n" " "))" >> $GITHUB_ENV        
 
   Deploy:
     needs: Enumerate
