@@ -20,6 +20,7 @@ jobs:
     needs: Enumerate
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         site: ${{fromJson(needs.Enumerate.outputs.microsites)}}
     steps:
